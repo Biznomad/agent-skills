@@ -1,0 +1,4 @@
+interface:
+  display_name: "Graph Engineering"
+  short_description: "Design reliable multi-agent workflow graphs"
+  default_prompt: "Use $graph-engineering to decide whether this task needs a graph and design the smallest reliable workflow."

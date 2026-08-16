@@ -1,0 +1,184 @@
+<!-- ============================================================================
+     SCROLL-SCRUB HERO — drop-in reference implementation
+     Replace: FRAME_DIR_BIG, FRAME_DIR_SM, TOTAL, ?v=1, and the beat copy.
+     Frames must be named 0000.webp … NNNN.webp, plus photo.webp (a copy of 0000).
+     ========================================================================= -->
+<style>
+  /* A generic `section{padding:…}` rule pushes the sticky child down and leaves a
+     band of page background under the nav. Reset it explicitly. */
+  .scrub-sec{position:relative;height:300vh;background:#04060c;padding:0;margin:0}
+  @media (max-width:760px){.scrub-sec{height:220vh}}
+
+  /* Poster = frame 0, so the first paint is the scene and never a black box. */
+  .scrub-stick{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;
+    background:#04060c center/cover no-repeat url("FRAME_DIR_SM/0000.webp?v=1")}
+  @media(min-width:761px){.scrub-stick{background-image:url("FRAME_DIR_BIG/0000.webp?v=1")}}
+
+  .scrub-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+  /* Keeps centred copy legible over bright footage without flattening the image. */
+  .scrub-vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(95% 58% at 50% 50%,rgba(4,6,12,.58),rgba(4,6,12,0) 70%),
+      radial-gradient(120% 90% at 50% 40%,transparent 38%,rgba(4,6,12,.5) 100%),
+      linear-gradient(180deg,rgba(4,6,12,.62) 0%,transparent 24%,transparent 56%,rgba(8,8,10,.92) 100%)}
+
+  .scrub-copy{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+    pointer-events:none;padding:0 22px}
+  .scrub-copy .beat{position:absolute;max-width:900px}
+  .scrub-copy h2{font-weight:800;line-height:.94;letter-spacing:-.04em;
+    font-size:clamp(40px,7.6vw,104px);color:#f4f1ea;
+    text-shadow:0 2px 6px rgba(0,0,0,.75),0 10px 44px rgba(0,0,0,.7)}
+  .scrub-copy h2 .g{color:#ccff3d}
+  .scrub-eyebrow{font-family:ui-monospace,monospace;letter-spacing:.2em;font-size:12px;
+    color:#ccff3d;text-transform:uppercase;margin-bottom:16px;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+  .scrub-sub{margin-top:18px;font-weight:600;font-size:clamp(15px,1.8vw,20px);
+    color:#a8a39a;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+  .scrub-cta{margin-top:26px;pointer-events:auto;display:inline-flex;align-items:center;gap:10px;
+    background:#ccff3d;color:#0a0f00;font-weight:800;font-size:16px;padding:15px 30px;
+    border-radius:999px;min-height:48px;text-decoration:none;transition:transform .15s}
+  .scrub-cta:hover{transform:translateY(-2px)}
+
+  .scrub-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);color:#ccff3d;
+    font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    opacity:.85;pointer-events:none;transition:opacity .3s}
+  .scrub-cue svg{display:block;margin:6px auto 0;width:22px;height:22px;
+    animation:scrubBob 1.6s ease-in-out infinite}
+  @keyframes scrubBob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  .scrub-prog{position:absolute;left:0;right:0;bottom:0;height:3px;
+    background:rgba(244,241,234,.07);z-index:4}
+  .scrub-bar{height:100%;width:0;background:#ccff3d;box-shadow:0 0 12px #ccff3d}
+
+  /* Static but complete — never a blank screen. */
+  @media (prefers-reduced-motion:reduce){
+    .scrub-sec{height:100vh}
+    .scrub-cue{display:none}
+    .scrub-copy{display:grid;align-content:center}
+    .scrub-copy .beat{position:static}
+  }
+</style>
+
+<section class="scrub-sec" id="scrubSec" aria-label="How it works">
+  <div class="scrub-stick">
+    <canvas class="scrub-canvas" id="scrubCanvas"></canvas>
+    <div class="scrub-vignette" aria-hidden="true"></div>
+    <div class="scrub-copy">
+      <!-- Beat 1 is the value proposition and is visible at load. -->
+      <div class="beat" id="beat1">
+        <div class="scrub-eyebrow">Eyebrow · context</div>
+        <h2>Headline that says<br /><span class="g">what this is.</span></h2>
+        <div class="scrub-sub">One line of specificity.</div>
+      </div>
+      <div class="beat" id="beat2" style="opacity:0">
+        <div class="scrub-eyebrow">Middle beat</div>
+        <h2>The turn in<br /><span class="g">the story.</span></h2>
+      </div>
+      <div class="beat" id="beat3" style="opacity:0">
+        <div class="scrub-eyebrow">Closing beat</div>
+        <h2>The payoff line<br /><span class="g">goes here.</span></h2>
+        <a href="#next" class="scrub-cta">Primary action →</a>
+      </div>
+    </div>
+    <div class="scrub-cue" id="scrubCue">Scroll
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="scrub-prog"><div class="scrub-bar" id="scrubBar"></div></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var cv=document.getElementById("scrubCanvas"); if(!cv) return;
+  var ctx=cv.getContext("2d");
+  var MOBILE = window.matchMedia && matchMedia("(max-width:760px)").matches;
+
+  var TOTAL = 287;                    // frames on disk
+  var N     = MOBILE ? 120 : TOTAL;   // mobile walks the same set in bigger steps
+  var DIR   = MOBILE ? "FRAME_DIR_SM/" : "FRAME_DIR_BIG/";
+  var VER   = "?v=1";                 // BUMP whenever frames are replaced
+
+  function srcFor(i){
+    var f = MOBILE ? Math.round(i*((TOTAL-1)/(N-1))) : i;
+    return DIR + ("0000"+f).slice(-4) + ".webp" + VER;
+  }
+
+  var imgs=new Array(N), cur=-1;
+
+  function drawCover(img){
+    if(!img || !img.complete || !img.naturalWidth) return;
+    var dpr=Math.min(2, window.devicePixelRatio||1);
+    var cw=cv.clientWidth, ch=cv.clientHeight;
+    if(cv.width!==cw*dpr || cv.height!==ch*dpr){ cv.width=cw*dpr; cv.height=ch*dpr; }
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var ir=img.naturalWidth/img.naturalHeight, cr=cw/ch, w,h,x,y;
+    if(cr>ir){ w=cw; h=cw/ir; x=0; y=(ch-h)/2; } else { h=ch; w=ch*ir; x=(cw-w)/2; y=0; }
+    ctx.clearRect(0,0,cw,ch); ctx.drawImage(img,x,y,w,h);
+  }
+  // Closest loaded frame, so scrubbing mid-stream never shows a hole.
+  function nearest(i){
+    if(imgs[i]&&imgs[i].complete&&imgs[i].naturalWidth) return imgs[i];
+    for(var d=1;d<N;d++){
+      if(imgs[i-d]&&imgs[i-d].complete&&imgs[i-d].naturalWidth) return imgs[i-d];
+      if(imgs[i+d]&&imgs[i+d].complete&&imgs[i+d].naturalWidth) return imgs[i+d];
+    }
+    return null;
+  }
+  function show(i){ i=Math.max(0,Math.min(N-1,i|0)); if(i===cur) return; cur=i; drawCover(nearest(i)); }
+
+  function load1(k){
+    if(imgs[k]) return;
+    var im=new Image(); try{ im.fetchPriority="low"; }catch(e){}
+    im.onload=function(){ if(k===0) show(0); else if(Math.abs(k-cur)<3) drawCover(im); };
+    im.src=srcFor(k); imgs[k]=im;
+  }
+  var EAGER=Math.min(10,N);
+  for(var k=0;k<EAGER;k++) load1(k);
+  function loadRest(){ for(var k=EAGER;k<N;k++) load1(k); }
+  var idleCb=window.requestIdleCallback||function(f){return setTimeout(f,200);};
+  if(document.readyState==="complete") idleCb(loadRest);
+  else addEventListener("load", function(){ idleCb(loadRest); });
+  addEventListener("resize", function(){ var c=cur; cur=-1; drawCover(nearest(Math.max(0,c))); });
+
+  var sect=document.getElementById("scrubSec");
+  var b1=document.getElementById("beat1"), b2=document.getElementById("beat2"),
+      b3=document.getElementById("beat3"), cue=document.getElementById("scrubCue"),
+      bar=document.getElementById("scrubBar");
+
+  if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){
+    var settle=function(){ show(N-1);
+      if(b1)b1.style.opacity=0; if(b2)b2.style.opacity=0; if(b3)b3.style.opacity=1;
+      if(cue)cue.style.display="none"; };
+    if(imgs[0]&&imgs[0].complete) settle(); else setTimeout(settle,700);
+    return;
+  }
+
+  function prog(){
+    var r=sect.getBoundingClientRect(), run=r.height-innerHeight;
+    if(!(run>0)) return r.top<0?1:0;      // guard: /0 yields NaN and kills every compare
+    return Math.max(0,Math.min(1,-r.top/run));
+  }
+  // 1 inside [a,b], linear fade of width f at each edge — no dead zones between beats.
+  function band(p,a,b,f){
+    if(p<a-f||p>b+f) return 0;
+    if(p<a) return (p-(a-f))/f;
+    if(p>b) return ((b+f)-p)/f;
+    return 1;
+  }
+  var ticking=false;
+  function onScroll(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){
+      ticking=false;
+      var p=prog();
+      show(Math.round(p*(N-1)));
+      if(b1) b1.style.opacity=band(p,0,0.26,0.07);
+      if(b2) b2.style.opacity=band(p,0.40,0.62,0.07);
+      if(b3) b3.style.opacity=band(p,0.76,1.01,0.07);
+      if(cue) cue.style.opacity = p>0.06?0:0.85;
+      if(bar) bar.style.width=(p*100)+"%";
+    });
+  }
+  addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+})();
+</script>
