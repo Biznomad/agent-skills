@@ -45,7 +45,7 @@ User wants carousel templates, post designs, or visual content assets for social
 
 6. **Save deliverables**. Store all HTML files in `/root/biznomad-content-factory/templates/` with version folders (v1, v2, v3, v4).
 
-## The Simplifyinai Formula (Naeem's Preferred Style)
+## The Simplifyinai Formula (Owner's Preferred Style)
 
 When the user sends a reference image of simplifyinai-style posts, the formula is:
 
@@ -61,7 +61,7 @@ Key characteristics:
 - No abstract decorative backgrounds
 
 ## Key Pitfalls
-- **WAIT for a reference image before building.** Do not assume cyberpunk/hacker aesthetic. Naeem's preference is simplifyinai-style: clean, minimal, screenshot-based. The initial v1-v4 builds were all rejected because I assumed wrong.
+- **WAIT for a reference image before building.** Do not assume cyberpunk/hacker aesthetic. The owner's preference is simplifyinai-style: clean, minimal, screenshot-based. The initial v1-v4 builds were all rejected because I assumed wrong.
 - **Background opacity must be tested** — CSS opacity at 0.2 is invisible in screenshots. Use 0.4-0.6 for visible art.
 - **Dark overlay kills backgrounds** — use `radial-gradient(ellipse at center, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.6) 100%)` not 0.8+ opacity.
 - **Animated elements (code rain, blinking) don't render in static screenshots** — use static positioned elements instead.

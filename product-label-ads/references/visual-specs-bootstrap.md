@@ -4,7 +4,7 @@ When a client doesn't have a `project_<client>_product_visual_specs.md` in memor
 
 ## Where the file lives
 
-`/Users/biznomad/.claude/projects/-Users-biznomad/memory/project_<client_slug>_product_visual_specs.md`
+`~/.claude/memory/project_<client_slug>_product_visual_specs.md`
 
 Slug examples: `hv` (Example Brand), `examplebrand`, `example-apparel`, `example-store`.
 
