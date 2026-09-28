@@ -9,11 +9,11 @@ Senior Shopify Plus developer and designer. Combines distinctive theme design, f
 
 ## Store Context
 
-- **Store:** biznomad.myshopify.com (Shopify Plus)
-- **Access Token:** stored in VPS credentials (`SHOPIFY_ACCESS_TOKEN`)
-- **Client ID:** ce7b70e29f174b55f15dc8723a7b9794
+- **Store:** your-store.myshopify.com (Shopify Plus)
+- **Access Token:** provide via the `SHOPIFY_ACCESS_TOKEN` environment variable
+- **Client ID:** YOUR_SHOPIFY_CLIENT_ID
 - **API Version:** 2026-01
-- **Products:** Dental AI plans ($497, $997, $1,997/mo) with subscription selling plans
+- **Products:** load the target store catalog and selling plans; no account-specific defaults are bundled
 
 ## Core Workflow
 
@@ -30,11 +30,11 @@ Senior Shopify Plus developer and designer. Combines distinctive theme design, f
 | Item | Value |
 |------|-------|
 | API version | `2026-01` (stable) |
-| GraphQL Admin | `POST https://biznomad.myshopify.com/admin/api/2026-01/graphql.json` |
-| Storefront API | `POST https://biznomad.myshopify.com/api/2026-01/graphql.json` |
+| GraphQL Admin | `POST https://your-store.myshopify.com/admin/api/2026-01/graphql.json` |
+| Storefront API | `POST https://your-store.myshopify.com/api/2026-01/graphql.json` |
 | Ajax API | `/cart.js`, `/cart/add.js`, `/cart/change.js` |
 | CLI | `npm install -g @shopify/cli` |
-| Theme dev | `shopify theme dev --store biznomad.myshopify.com` |
+| Theme dev | `shopify theme dev --store your-store.myshopify.com` |
 | Docs | [shopify.dev](https://shopify.dev) |
 
 ## Reference Files
@@ -108,14 +108,9 @@ Every theme must be unmistakable. Avoid:
 - **Wholesale Channel** — Separate storefront for wholesale
 - **Unlimited Staff Accounts** — For team/agent access
 
-## Subscription Billing (Current Setup)
+## Subscription Billing (Configuration Required)
 
-Selling Plan Group: "Dental AI Monthly" (ID: gid://shopify/SellingPlanGroup/1172930648)
-- Plan: "Monthly - 7 Day Free Trial" (ID: gid://shopify/SellingPlan/1916338264)
-- Pricing: $0 first cycle (trial), full price after cycle 1
-- Products attached: all 3 dental plans
+Fetch the target store's selling plan groups, plans, and variant IDs from Shopify. Store these in the client project configuration; never reuse another store's identifiers.
 
-Checkout URLs:
-- Starter $497: `https://biznomad.myshopify.com/cart/43920738123864:1`
-- Growth $997: `https://biznomad.myshopify.com/cart/43920738680920:1`
-- Enterprise $1,997: `https://biznomad.myshopify.com/cart/43920739336280:1`
+Example checkout URL: `https://your-store.myshopify.com/cart/<VARIANT_ID>:1`.
+Confirm trial terms, recurring pricing, and disclosures against the configured selling plan before sharing checkout links.

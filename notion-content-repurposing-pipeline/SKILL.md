@@ -50,4 +50,4 @@ User wants to repurpose Notion content pipeline items into posts for LinkedIn, T
 - Use the brand tagline where appropriate
 
 ## Output Location
-`/root/biznomad-content-factory/biznomad_content_factory.json`
+`~/content-factory/content_factory.json`

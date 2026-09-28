@@ -39,7 +39,7 @@ This skill enforces a 6-step workflow that turned 50% pass-rate on Example Brand
 ## Bootstrap — required before generation
 
 1. **Higgsfield CLI authed.** Run `higgsfield account status`. If it errors, ask the user to run `higgsfield auth login` and wait. CLI lives at `/opt/homebrew/bin/higgsfield`.
-2. **Client visual specs file exists.** Look for `~/.Codex/projects/-Users-biznomad/memory/project_<client>_product_visual_specs.md` (e.g. `project_hv_product_visual_specs.md`). It must contain: jar shape, cap color, label colors, exact ingredient list (no inventions), brand badge geometry, bottom badge layout, border pattern, and color palette. **If missing, do not proceed** — invoke the bootstrap-visual-specs flow (see `references/visual-specs-bootstrap.md`) to interview the user and write one.
+2. **Client visual specs file exists.** Look for `<client-project-root>/memory/project_<client>_product_visual_specs.md` (e.g. `project_example_product_visual_specs.md`). It must contain: jar shape, cap color, label colors, exact ingredient list (no inventions), brand badge geometry, bottom badge layout, border pattern, and color palette. **If missing, do not proceed** — invoke the bootstrap-visual-specs flow (see `references/visual-specs-bootstrap.md`) to interview the user and write one.
 3. **Client `AGENTS.md` checked.** `Clients/<Client-Name>/AGENTS.md` confirms which Shopify store, brand colors, and ad accounts to target. Project-isolation rules apply — never mix accounts/keys/data.
 
 ## The 6-step workflow
@@ -82,7 +82,7 @@ Thumbnails lie. Always:
 4. Read every word on the label out loud (in your reasoning) and compare to the visual specs file. Flag any deviation:
    - Misspelled ingredient (TURMEKIIT, GARDELION, MANM4A, BLADBERWHICK, COLOROPPYLL, etc.)
    - Invented ingredient (Cosmed, Koerohentz, Durozov, etc.)
-   - Wrong brand wordmark spelling (HOLISTIC VIRALYS instead of EXAMPLE BRAND, etc.)
+   - Wrong brand wordmark spelling (EXAMPEL BRAND instead of EXAMPLE BRAND, etc.)
    - Wrong cap color, jar transparency, label background color
    - Wrong badge geometry (rectangular vs round)
 

@@ -1,6 +1,6 @@
 # Composite Workflow — when AI label fidelity fails
 
-When two passes of Nano Banana Pro can't render the label correctly (typical for products with multi-element labels: illustrations + benefit icons + multiple text tiers, like the HV Sea Moss gels), drop AI bottle generation entirely. Instead:
+When two passes of Nano Banana Pro can't render the label correctly (typical for products with multi-element labels: illustrations + benefit icons + multiple text tiers, like the example gel products), drop AI bottle generation entirely. Instead:
 
 1. Generate the **environmental scene only** (no product) via AI.
 2. **Composite the real product photo** in via Pillow.

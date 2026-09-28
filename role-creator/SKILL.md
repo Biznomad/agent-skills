@@ -70,7 +70,7 @@ From Codex custom agent docs (`/codex/subagents`):
 
 ```bash
 # 1) Write a standalone custom-agent file
-/home/willr/Applications/skills/skills/role-creator/scripts/write_role_config.sh \
+/home/user/Applications/skills/skills/role-creator/scripts/write_role_config.sh \
   --output ~/.codex/agents/reviewer.toml \
   --role-name reviewer \
   --description "PR reviewer focused on correctness, security, and risk." \
@@ -79,7 +79,7 @@ From Codex custom agent docs (`/codex/subagents`):
   --developer-instructions "Review code like an owner. Lead with concrete findings and residual risks."
 
 # Optional: include nickname candidates for display
-/home/willr/Applications/skills/skills/role-creator/scripts/write_role_config.sh \
+/home/user/Applications/skills/skills/role-creator/scripts/write_role_config.sh \
   --output ~/.codex/agents/reviewer.toml \
   --role-name reviewer \
   --description "PR reviewer focused on correctness, security, and risk." \

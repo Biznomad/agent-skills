@@ -56,8 +56,8 @@ python ~/.claude/skills/ads-compliance-check/compliance-check.py ./ads-manifest.
     {
       "id": "MM-71-A1",
       "platform": "meta",
-      "account_id": "act_930457189958096",
-      "campaign_id": "120214000000000001",
+      "account_id": "act_123456789012345",
+      "campaign_id": "123456789012345678",
       "change_type": "edit",
       "creative_paths": ["/abs/path/to/creative.mp4"],
       "copy": { "primary_text": "...", "headline": "..." },

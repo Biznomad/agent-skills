@@ -43,7 +43,7 @@ Mark deviations:
 |---|---|---|
 | Misspelled ingredient | TURMEKIIT instead of TURMERIC | Regenerate with character-level guard |
 | Invented ingredient | "Cosmed", "Koerohentz", "Durozov" | Regenerate or composite-fallback |
-| Brand wordmark misspelled | "HOLISTIC VIRALYS" | **Hard fail — never ship**. Regenerate |
+| Brand wordmark misspelled | "EXAMPEL BRAND" | **Hard fail — never ship**. Regenerate |
 | Wrong cap color | gold cap when product is black cap | Regenerate with explicit cap-color callout |
 | Wrong jar transparency | opaque when product is see-through | Regenerate with "see-through tinted plastic" |
 | Wrong logo geometry | rectangular badge when product has round badge | Regenerate with explicit "round green circle badge, NOT rectangular" |

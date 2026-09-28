@@ -6,3 +6,18 @@ __pycache__/
 .env.*
 *.log
 .venv/
+
+# Local credentials and generated client data
+*.pem
+*.key
+credentials.json
+.credentials.json
+*.sqlite
+*.sqlite3
+.theme-cache/
+audit-output/
+shopify-audit-config/
+posthog.env
+
+.coverage
+.coverage.*

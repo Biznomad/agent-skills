@@ -111,7 +111,7 @@ if (sessionStorage.getItem('dashboard_auth') === 'true') {
   </nav>
   <div class="sidebar-footer">
     <a href="sms:+15551234567" class="btn btn-outline btn-sm">Message Us</a>
-    <a href="https://calendly.com/biznomad" class="btn btn-accent btn-sm">Schedule Call</a>
+    <a href="https://calendly.com/your-team" class="btn btn-accent btn-sm">Schedule Call</a>
   </div>
 </aside>
 ```

@@ -1106,7 +1106,7 @@ on the brain host.
 **4a. Collect MCP URL.** Prompt the user:
 
 ```
-Paste your gbrain MCP URL (e.g. https://wintermute.tail554574.ts.net:3131/mcp):
+Paste your gbrain MCP URL (e.g. https://your-server.example.com:3131/mcp):
 ```
 
 Read with plain `read -r` (no secret hygiene needed — the URL alone isn't

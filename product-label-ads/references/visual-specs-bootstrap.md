@@ -6,7 +6,7 @@ When a client doesn't have a `project_<client>_product_visual_specs.md` in memor
 
 `~/.claude/memory/project_<client_slug>_product_visual_specs.md`
 
-Slug examples: `hv` (Example Brand), `examplebrand`, `example-apparel`, `example-store`.
+Slug examples: `example` (Example Brand), `examplebrand`, `example-apparel`, `example-store`.
 
 After writing it, add a one-line pointer in `MEMORY.md` under the relevant client section.
 
@@ -98,4 +98,4 @@ When generating AI ad creative for <Client> products, the model MUST preserve th
 
 ## Worked example: Example Brand
 
-Already exists at `project_hv_product_visual_specs.md`. Use it as the template when writing for a new client. Captures both gummies (AI-friendly) and gel jars (composite-required).
+Create `project_example_product_visual_specs.md` using the template above; no private client example is bundled. Captures both gummies (AI-friendly) and gel jars (composite-required).

@@ -53,7 +53,7 @@ For sites requiring Google/Discord/etc login (like star-swap.com):
 
 ```bash
 # Terminal 1: Launch Chrome with your real profile and remote debugging
-google-chrome --remote-debugging-port=9222 --user-data-dir=/home/willr/.config/google-chrome/Default &
+google-chrome --remote-debugging-port=9222 --user-data-dir=/home/user/.config/google-chrome/Default &
 
 # Terminal 2: Connect agent-browser to that Chrome instance
 agent-browser --cdp 9222 open "https://star-swap.com"
@@ -77,7 +77,7 @@ agent-browser --session starswap open "https://star-swap.com"
 # Already logged in automatically
 ```
 
-**am.will.ryan Chrome profile:** `/home/willr/.config/google-chrome/Default`
+**Example Chrome profile:** `/home/user/.config/google-chrome/Default`
 
 ## Core Commands
 

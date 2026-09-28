@@ -82,7 +82,7 @@ python scripts/gmail.py send --to "user@example.com" --cc "cc@example.com" --bcc
 
 # Send from an alias (must be configured in Gmail settings)
 python scripts/gmail.py send --to "user@example.com" --subject "Hello" --body "Message" \
-  --from "Mile9 Accounts <accounts@mile9.io>"
+  --from "Example Accounts <accounts@example.com>"
 
 # Send HTML email
 python scripts/gmail.py send --to "user@example.com" --subject "HTML Email" \

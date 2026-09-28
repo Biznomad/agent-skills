@@ -385,7 +385,7 @@ tiaogaoren/
 └── results/
 ```
 
-**See:** `/Users/tiansheng/Workspace/prompts/tiaogaoren/` for full implementation.
+**See:** `/Users/username/Workspace/prompts/tiaogaoren/` for full implementation.
 
 ## Resources
 

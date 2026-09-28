@@ -43,7 +43,7 @@ User wants carousel templates, post designs, or visual content assets for social
    - Topic-specific background graphics
    - Consistent typography and layout structure
 
-6. **Save deliverables**. Store all HTML files in `/root/biznomad-content-factory/templates/` with version folders (v1, v2, v3, v4).
+6. **Save deliverables**. Store all HTML files in `~/content-factory/templates/` with version folders (v1, v2, v3, v4).
 
 ## The Simplifyinai Formula (Owner's Preferred Style)
 

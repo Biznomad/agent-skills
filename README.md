@@ -2,7 +2,7 @@
 
 A curated library of agent skills for [Claude Code](https://claude.com/claude-code) and compatible agent harnesses — covering paid ads auditing, SEO/GEO/AEO, Shopify development, web design, video/image generation, marketing automation, DevOps, and more.
 
-Shared by [Biznomad](https://github.com/Biznomad). Client-specific data, credentials, and infrastructure references have been scrubbed; example names like "Example Brand" and `203.0.113.x` IPs are placeholders — swap in your own.
+Shared by [Biznomad](https://github.com/Biznomad). The current files use configurable examples in place of identified client details and private infrastructure references. Supply your own credentials outside the repository. See [sanitization scope](SANITIZATION.md), including the Git history limitation.
 
 ## Install
 

@@ -145,7 +145,7 @@ Save the new client to the user's memory index. Add an entry with:
 ### references/
 - `website-template.md` — Complete website HTML structure patterns and CSS/JS reference
 - `dashboard-template.md` — Complete dashboard HTML structure patterns and interactive JS
-- `packages.md` — Default Biznomad package pricing, features, and platform details
+- `packages.md` — Configurable package pricing, features, and platform details
 
 ### assets/
 - `biznomad-logo.jpg` — Biznomad agency logo for dashboards and footers

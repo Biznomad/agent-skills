@@ -25,7 +25,7 @@ Always confirm which store before making changes. Known stores:
 |-------|---------------|-------------------|
 | Example Brand | example-brand.myshopify.com | `Projects/Clients/Example Brand/` |
 | ExampleBrand Naturals | your-store.myshopify.com | `Projects/Clients/ExampleBrand-Naturals/` |
-| Biznomad | biznomad.myshopify.com | `Projects/Clients/Biznomad/` |
+| Example Store | your-store.myshopify.com | `<client-project-root>/` |
 
 ## File Naming Convention
 

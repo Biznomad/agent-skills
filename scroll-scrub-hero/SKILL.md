@@ -8,7 +8,7 @@ version: 1.0.0
 
 A sticky `<canvas>` that advances through a WebP frame sequence as the page scrolls, with
 **real DOM copy** layered over it. Proven on `exampleclientjunk.com` and
-`deals.biznomad.io`.
+`deals.example.com`.
 
 ## The one rule that matters
 
